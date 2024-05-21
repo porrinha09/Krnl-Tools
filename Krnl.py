@@ -1,3 +1,4 @@
-import os
+#!/usr/bin/env python
 
-os.system("clear")
+# Limpar o console
+print("\033c")
