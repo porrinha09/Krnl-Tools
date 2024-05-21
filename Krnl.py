@@ -28,8 +28,6 @@ def print_command_list():
     print("{100} - ;exit")
     print(BLUE + "------------------------------------------------" + RESET)
 
-print_command_list()
-
 def process_command(command):
     if command == ";my ip":
         def get_ip():
@@ -61,53 +59,50 @@ def process_command(command):
 
         print("Seus MAC:", ", ".join(mac_addresses))
     elif command == ";sherlock":
-    	social_media_sites = {
-    "Twitter": "https://twitter.com/{}",
-    "Facebook": "https://www.facebook.com/{}",
-    "Instagram": "https://www.instagram.com/{}",
-    # Adicione mais sites conforme necessário
-}
+        social_media_sites = {
+            "Twitter": "https://twitter.com/{}",
+            "Facebook": "https://www.facebook.com/{}",
+            "Instagram": "https://www.instagram.com/{}",
+            # Adicione mais sites conforme necessário
+        }
 
-def check_site(site, url, username):
-    full_url = url.format(username)
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
-    try:
-        response = requests.get(full_url, headers=headers)
-        if response.status_code == 200:
-            # Verifique o conteúdo da página para confirmação
-            if "profile not found" in response.text.lower() or "page not found" in response.text.lower():
-                return site, "Usuário não encontrado"
-            else:
-                return site, full_url
-        else:
-            return site, "Usuário não encontrado"
-    except requests.RequestException as e:
-        return site, f"Erro ao acessar {site}: {e}"
+        def check_site(site, url, username):
+            full_url = url.format(username)
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+            try:
+                response = requests.get(full_url, headers=headers)
+                if response.status_code == 200:
+                    # Verifique o conteúdo da página para confirmação
+                    if "profile not found" in response.text.lower() or "page not found" in response.text.lower():
+                        return site, "Usuário não encontrado"
+                    else:
+                        return site, full_url
+                else:
+                    return site, "Usuário não encontrado"
+            except requests.RequestException as e:
+                return site, f"Erro ao acessar {site}: {e}"
 
-def check_username(username):
-    results = {}
-    with ThreadPoolExecutor(max_workers=10) as executor:
-        futures = [executor.submit(check_site, site, url, username) for site, url in social_media_sites.items()]
-        for future in as_completed(futures):
-            site, result = future.result()
-            results[site] = result
-            time.sleep(1)  # Atraso entre requisições para evitar bloqueios
-    
-    return results
+        def check_username(username):
+            results = {}
+            with ThreadPoolExecutor(max_workers=10) as executor:
+                futures = [executor.submit(check_site, site, url, username) for site, url in social_media_sites.items()]
+                for future in as_completed(futures):
+                    site, result = future.result()
+                    results[site] = result
+                    time.sleep(1)  # Atraso entre requisições para evitar bloqueios
 
-def main():
-    print(f"{VERDE}Digite um nome:{RESET}")
-    username = input()
-    print(f"{VERDE}[{LARANJA}*{VERDE}] Verificando nome de usuário {RESET}{username}{VERDE} em: {RESET}")
-    results = check_username(username)
-    
-    for site, result in results.items():
-        print(f"{VERDE}[{LARANJA}*{VERDE}] {site}: {RESET}{result}")
+            return results
 
-if __name__ == "__main__":
-    main()
+        print(f"{VERDE}Digite um nome:{RESET}")
+        username = input()
+        print(f"{VERDE}[{LARANJA}*{VERDE}] Verificando nome de usuário {RESET}{username}{VERDE} em: {RESET}")
+        results = check_username(username)
+
+        for site, result in results.items():
+            print(f"{VERDE}[{LARANJA}*{VERDE}] {site}: {RESET}{result}")
+
     elif command == ";reset":
         os.system("clear")
         sleep(1)
@@ -115,6 +110,8 @@ if __name__ == "__main__":
     elif command == ";exit":
         os.system("clear")
         exit()
+
+print_command_list()
 
 while True:
     command = input("\033[34m┌──(Kelvin zv)-[~]\n└─$ \033[0m")
