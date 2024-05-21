@@ -41,7 +41,7 @@ def process_command(command):
         print_command_list()
     elif command == ";exit":
         os.system("clear")
-        break
+        exit()
 
 while True:
     command = input("\033[34m┌──(Kelvin zv)-[~]\n└─$ \033[0m")
