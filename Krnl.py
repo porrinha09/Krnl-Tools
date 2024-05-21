@@ -16,15 +16,15 @@ def print_command_list():
 
 def process_command(command):
     if command == "my ip":
-    	def get_ip():
-    response = requests.get('https://ipinfo.io/ip')
-    return response.text.strip()
+        def get_ip():
+            response = requests.get('https://ipinfo.io/ip')
+            return response.text.strip()
 
-ip = get_ip()
-print(f"Seu IP: {ip}")
+        ip = get_ip()
+        print(f"Seu IP: {ip}")
        
-os.system("clear")
-print_command_list()
+        os.system("clear")
+        print_command_list()
 
 while True:
     command = input("\033[34m┌──(Kelvin zv)-[~]\n└─$ \033[0m")
