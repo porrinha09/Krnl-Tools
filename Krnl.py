@@ -1,6 +1,7 @@
 import os
 import requests
 from time import sleep
+import subprocess
 
 COR = "\033[38;2;92;92;255m"
 BLUE = "\033[38;2;128;163;255m"
@@ -35,6 +36,26 @@ def process_command(command):
         print(f"Seu IP: {ip}")
     elif command == ";clear":
         os.system("clear")
+    elif command == ";my mac":
+output = subprocess.check_output(["ip", "link", "show"]).decode("utf-8")
+
+for line in output.split('\n'):
+    if "ether" in line:
+        mac_address = line.split()[1]
+        break
+
+print("Seu MAC:", mac_address)
+    elif command == ";all my mac":
+output = subprocess.check_output(["ip", "link", "show"]).decode("utf-8")
+
+mac_addresses = []
+
+for line in output.split('\n'):
+    if "ether" in line:
+        mac_address = line.split()[1]
+        mac_addresses.append(mac_address)
+
+print("Seus MAC:", ", ".join(mac_addresses))
     elif command == ";reset":
         os.system("clear")
         sleep(1)
