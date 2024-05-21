@@ -9,13 +9,13 @@ LARANJA = "\033[38;2;241;133;30m"
 RESET = "\033[0m"
 
 def print_command_list():
-	os.system("clear")
+    os.system("clear")
     print(BLUE + "Bem-vindo ao Krnl Tools" + RESET)
     print(BLUE + "------------------------------------------------" + RESET)
     print(LARANJA + "IP:" + BLUE)
     print("{1} - ;my ip")
-    
-        print_command_list()
+
+print_command_list()
 
 def process_command(command):
     if command == ";my ip":
