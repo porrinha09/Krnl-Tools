@@ -11,16 +11,15 @@ def process_command(command):
     if command == "my ip":
         # Adicione aqui a lógica para obter e exibir o endereço IP
         print("Seu endereço IP é 192.168.1.1")  # Exemplo simples
-    else:
-        print("Comando não reconhecido")
 
 print(BLUE + "Bem-vindo ao Krnl Tools" + RESET)
 print(BLUE + "------------------------------------------------" + RESET)
 print(LARANJA + "IP:" + BLUE)
 print("{1} - ;my ip")
 
+os.system("clear")
+
 while True:
-    os.system("clear")
     print(BLUE + "Bem-vindo ao Krnl Tools" + RESET)
     print(BLUE + "------------------------------------------------" + RESET)
     print(LARANJA + "IP:" + BLUE)
