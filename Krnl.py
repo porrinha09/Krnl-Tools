@@ -1,5 +1,6 @@
 import os
 import requests
+from time import sleep
 
 COR = "\033[38;2;92;92;255m"
 BLUE = "\033[38;2;128;163;255m"
@@ -14,6 +15,13 @@ def print_command_list():
     print(BLUE + "------------------------------------------------" + RESET)
     print(LARANJA + "IP:" + BLUE)
     print("{1} - ;my ip")
+    print("{2} - ;my mac")
+    print("{3} - ;all my mac")
+    print(LARANJA + "CONFIGS:" + BLUE)
+    print("{99} - ;clear")
+    print("{200} - ;reset")
+    print("{100} - ;exit")
+    print(BLUE + "------------------------------------------------" + RESET)
 
 print_command_list()
 
@@ -25,6 +33,15 @@ def process_command(command):
 
         ip = get_ip()
         print(f"Seu IP: {ip}")
+    elif command == ";clear":
+        os.system("clear")
+    elif command == ";reset":
+        os.system("clear")
+        sleep(1)
+        print_command_list()
+    elif command == ";exit":
+        os.system("clear")
+        break
 
 while True:
     command = input("\033[34m┌──(Kelvin zv)-[~]\n└─$ \033[0m")
